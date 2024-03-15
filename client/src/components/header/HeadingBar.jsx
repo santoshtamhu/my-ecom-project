@@ -6,7 +6,7 @@ export const HeadingBar = () => {
     <>
       <div className=" bg-purple-600">
         <div className="container h-11 text-white flex justify-between items-center">
-          <div className="flex gap-4">
+          <div className="flex gap-5">
             <span className="flex gap-2 items-center">
               <LuMail />
               santosh@santosh.com
@@ -17,7 +17,7 @@ export const HeadingBar = () => {
             </span>
           </div>
           <div>
-            <ul className="flex gap-3">
+            <ul className="flex gap-5">
               <li>English</li>
               <li>USD</li>
               <li>Login</li>
