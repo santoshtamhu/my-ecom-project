@@ -8,28 +8,43 @@ import { SignUp } from "./pages/SignUp";
 import { Cart } from "./pages/Cart";
 import { Footer } from "./components/Footer";
 import { Products } from "./pages/Products";
+import { AddProducts } from "./pages/AddProducts";
+import { Root } from "postcss";
 
 const router = createBrowserRouter([
   {
     path: "/",
-
-    element: <Home />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
-  {
-    path: "/cart",
-    element: <Cart />,
-  },
-  {
-    path: "/products",
-    element: <Products />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <SignUp />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "products",
+        children: [
+          {
+            path: "",
+            element: <Products />,
+          },
+          {
+            path: "add_products",
+            element: <AddProducts />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 export default function App() {
@@ -37,7 +52,7 @@ export default function App() {
     <>
       <HeadingBar />
       <Navbar />
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
       <Footer />
     </>
   );

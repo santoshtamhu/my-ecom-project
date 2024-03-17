@@ -3,8 +3,8 @@ import { LatestProducts } from "../components/LatestProducts";
 
 export const Products = () => {
   return (
-    <div>
+    <>
       <LatestProducts />
-    </div>
+    </>
   );
 };
