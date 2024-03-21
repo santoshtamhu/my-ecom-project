@@ -22,7 +22,7 @@ export const LatestProducts = () => {
             <div className="border-2">
               <div>
                 <img
-                  src={product.image ? product.image : "noImage.jpg"}
+                  src={product.image?.url ? product.image.url : "noImage.jpg"}
                   alt=""
                 />
               </div>

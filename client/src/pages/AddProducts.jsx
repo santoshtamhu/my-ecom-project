@@ -1,14 +1,52 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 
 export const AddProducts = () => {
-  axios.post("http://localhost:8000/api/products").then(res => {
-    
-  })
+  let initialValue = {
+    title: "",
+    price: "",
+    image: null,
+  };
+  const [data, setData] = useState(initialValue);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("price", data.price);
+    formData.append("image", data.image);
+
+    let access_token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWU4M2Q4MWZjZDhkNDUyOGJkMjgyNTEiLCJuYW1lIjoic2VsbGVyIiwiZW1haWwiOiJzMUBzMS5jb20iLCJwaG9uZSI6OTg1NjUyMiwicm9sZSI6InNlbGxlciIsIl9fdiI6MCwiaWF0IjoxNzEwODQ1MDE1fQ.xNNtbZZsOqE9gUZYySzuUaBoTMADuMtjwnW2j1wknb4";
+
+    axios
+      .post("http://localhost:8000/api/products", formData, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => {
+        console.log("product created");
+        console.log(formData.image);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]:
+        e.target.type === "file" ? e.target.files[0] : e.target.value,
+    });
+  };
+
   return (
     <>
       <div className="p-4">
-        <form className="max-w-md mx-auto">
+        <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               for="product_name"
@@ -18,8 +56,9 @@ export const AddProducts = () => {
             </label>
             <input
               type="text"
-              id="product_name"
-              name="product_name"
+              id="title"
+              name="title"
+              onChange={handleChange}
               placeholder="Enter product name"
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -32,7 +71,20 @@ export const AddProducts = () => {
               type="number"
               id="price"
               name="price"
+              onChange={handleChange}
               placeholder="Enter price"
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mb-6">
+            <label for="price" className="block text-gray-700 font-bold mb-2">
+              Image
+            </label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              onChange={handleChange}
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
