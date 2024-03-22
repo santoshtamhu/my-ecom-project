@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 
 export const AddProducts = () => {
   let initialValue = {
@@ -28,7 +29,7 @@ export const AddProducts = () => {
       })
       .then((res) => {
         console.log("product created");
-        console.log(formData.image);
+        console.log(data.image);
       })
       .catch((err) => {
         console.log(err);
@@ -36,16 +37,17 @@ export const AddProducts = () => {
   };
 
   const handleChange = (e) => {
+    console.log(e.target);
     setData({
       ...data,
       [e.target.name]:
-        e.target.type === "file" ? e.target.files[0] : e.target.value,
+        e.target.type === "file" ? e.target?.files[0] : e.target.value,
     });
   };
 
   return (
     <>
-      <div className="p-4">
+      <div className="p-4 my-28">
         <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label

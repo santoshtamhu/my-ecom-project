@@ -1,5 +1,6 @@
 import React from "react";
 import { LuMail, LuPhone, LuShoppingCart } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 export const HeadingBar = () => {
   return (
@@ -20,7 +21,9 @@ export const HeadingBar = () => {
             <ul className="flex gap-5">
               <li>English</li>
               <li>USD</li>
-              <li>Login</li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
               <li>Wishlist</li>
               <li className=" flex items-center">
                 <LuShoppingCart />

@@ -1,17 +1,32 @@
 import React from "react";
 import { FiSearch } from "react-icons/fi";
+import { Link, NavLink } from "react-router-dom";
 
 export const Navbar = () => {
   return (
     <>
       <div className="container my-5">
-        <nav className="flex justify-between items-center">
-          <div className="text-2xl font-bold">logo</div>
+        <nav id="menubar" className="flex justify-between items-center">
+          <div className="text-2xl font-bold">
+            <Link to="/">logo</Link>
+          </div>
           <div>
             <ul className="flex gap-4">
-              <li>Home</li>
+              <li>
+                <Link>Home</Link>
+              </li>
               <li>Pages</li>
-              <li>Products</li>
+              <li>
+                <NavLink
+                  to="/products"
+                  className={({ isActive, isPending }) =>
+                    isActive ? "active" : isPending ? "pending" : ""
+                  }
+                >
+                  Products
+                </NavLink>
+              </li>
+
               <li>Blog</li>
               <li>Shop</li>
               <li>Contact</li>
