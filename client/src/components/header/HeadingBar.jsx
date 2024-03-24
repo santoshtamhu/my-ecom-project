@@ -1,8 +1,16 @@
 import React from "react";
 import { LuMail, LuPhone, LuShoppingCart } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const HeadingBar = () => {
+  const navigate = useNavigate();
+  const access_token = localStorage.getItem("access_token");
+  console.log(access_token);
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate("/");
+  };
   return (
     <>
       <div className=" bg-purple-600">
@@ -21,9 +29,15 @@ export const HeadingBar = () => {
             <ul className="flex gap-5">
               <li>English</li>
               <li>USD</li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
+              {access_token ? (
+                <li>
+                  <button onClick={handleLogout}>Log Out</button>
+                </li>
+              ) : (
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              )}
               <li>Wishlist</li>
               <li className=" flex items-center">
                 <LuShoppingCart />

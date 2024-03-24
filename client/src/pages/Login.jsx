@@ -13,6 +13,7 @@ export const Login = () => {
       .post("http://localhost:8000/api/auth/login", { email, password })
       .then((res) => {
         toast.success("login successful");
+        localStorage.setItem("access_token", res.data.token);
         navigate("/");
       })
       .catch((err) => {
